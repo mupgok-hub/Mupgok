@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080817">
+<title>GPT ONE ONE LIVE</title>
+
+<style>
+:root {
+  --bg:#080817;
+  --cyan:#40e8ff;
+  --purple:#a855f7;
+  --text:#f5f5ff;
+  --muted:#9294b5;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
+
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 15% 20%,#39207855,transparent 35%),
+    radial-gradient(circle at 85% 70%,#005c8050,transparent 35%);
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 6%;
+  border-bottom:1px solid #ffffff15;
+}
+
+.logo {
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:var(--cyan);
+}
+
+.logo span {
+  color:white;
+}
+
+nav {
+  display:flex;
+  gap:20px;
+}
+
+nav a {
+  color:var(--muted);
+  text-decoration:none;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+nav a:hover {
+  color:var(--cyan);
+}
+
+.hero {
+  text-align:center;
+  padding:60px 15px 35px;
+}
+
+.tag {
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:5px;
+  margin-bottom:20px;
+}
+
+.hero h1 {
+  font-size:clamp(35px,8vw,70px);
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.hero h1 span {
+  color:var(--purple);
+  text-shadow:0 0 25px #a855f799;
+}
+
+.hero p {
+  color:var(--muted);
+  margin-top:18px;
+  font-size:13px;
+  letter-spacing:2px;
+}
+
+.player-card {
+  max-width:850px;
+  margin:25px auto;
+  padding:25px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#191a39,#0d1024);
+  border:1px solid #5a53a855;
+  box-shadow:0 0 45px #7030c522;
+}
+
+.visual {
+  width:100%;
+  aspect-ratio:16/9;
+  min-height:225px;
+  background:#10172e;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+#youtube-player {
+  width:100%;
+  height:100%;
+}
+
+.player-info {
+  padding:25px 5px 10px;
+}
+
+.small-title {
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:3px;
+}
+
+.track-title {
+  font-size:22px;
+  margin-top:10px;
+  overflow-wrap:anywhere;
+}
+
+.artist {
+  color:var(--muted);
+  margin-top:8px;
+  font-size:13px;
+}
+
+.statistics {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-top:22px;
+}
+
+.stat-box {
+  min-width:145px;
+  padding:14px 17px;
+  border:1px solid #40e8ff55;
+  border-radius:14px;
+  background:#40e8ff0d;
+  text-align:center;
+}
+
+.stat-label {
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1px;
+}
+
+.stat-number {
+  color:var(--cyan);
+  font-size:25px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.controls {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  margin-top:25px;
+}
+
+.control {
+  border:none;
+  background:transparent;
+  color:white;
+  font-size:23px;
+  cursor:pointer;
+  padding:8px;
+}
+
+.control.active {
+  color:var(--cyan);
+}
+
+.play-button {
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,#8b35ff,#13c9ff);
+  color:white;
+  font-size:25px;
+  cursor:pointer;
+  box-shadow:0 0 30px #8b35ff77;
+}
+
+.play-button:hover {
+  transform:scale(1.07);
+}
+
+.status {
+  text-align:center;
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:1px;
+  margin-top:20px;
+  line-height:1.6;
+}
+
+.section {
+  max-width:850px;
+  margin:45px auto;
+  padding:0 20px;
+}
+
+.section h2 {
+  font-size:20px;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+
+.section h2 span {
+  color:var(--cyan);
+}
+
+.info-card {
+  padding:22px;
+  border-radius:15px;
+  background:#15162d;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+footer {
+  border-top:1px solid #ffffff15;
+  text-align:center;
+  padding:30px 15px;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+@media(max-width:600px) {
+  header {
+    flex-direction:column;
+    gap:17px;
+    padding:18px 10px;
+  }
+
+  nav {
+    gap:13px;
+  }
+
+  nav a {
+    font-size:10px;
+  }
+
+  .player-card {
+    margin:15px;
+    padding:15px;
+  }
+
+  .visual {
+    min-height:200px;
+  }
+
+  .controls {
+    gap:10px;
+  }
+
+  .play-button {
+    width:58px;
+    height:58px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    GPT <span>ONE ONE</span> LIVE
+  </div>
+
+  <nav>
+    <a href="#home">HOME</a>
+    <a href="#player">LISTEN</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+  <div class="tag">
+    ELECTRONIC MUSIC EXPERIENCE
+  </div>
+
+  <h1>FEEL THE <span>BEAT</span></h1>
+
+  <p>
+    ONE WORLD · ONE STREAM · INFINITE MUSIC
+  </p>
+</section>
+
+<section class="player-card" id="player">
+
+  <div class="visual">
+    <div id="youtube-player"></div>
+  </div>
+
+  <div class="player-info">
+
+    <div class="small-title">
+      NOW PLAYING
+    </div>
+
+    <div class="track-title" id="track-title">
+      GPT ONE ONE LIVE
+    </div>
+
+    <div class="artist" id="artist">
+      Your Electronic Music Collection
+    </div>
+
+    <div class="statistics">
+
+      <div class="stat-box">
+        <div class="stat-label">
+          TOTAL TRACKS
+        </div>
+        <div class="stat-number" id="total-tracks">
+          —
+        </div>
+      </div>
+
+      <div class="stat-box">
+        <div class="stat-label">
+          PLAYED THIS VISIT
+        </div>
+        <div class="stat-number" id="session-tracks">
+          0
+        </div>
+      </div>
+
+    </div>
+
+    <div class="controls">
+
+      <button class="control" id="shuffle"
+        title="Shuffle">🔀</button>
+
+      <button class="control" id="previous"
+        title="Previous">⏮</button>
+
+      <button class="play-button" id="play">
+        ▶
+      </button>
+
+      <button class="control" id="next"
+        title="Next">⏭</button>
+
+      <button class="control" id="repeat"
+        title="Repeat">🔁</button>
+
+    </div>
+
+    <div class="status" id="status">
+      READY · PRESS PLAY TO START
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+
+  <h2>
+    ONE <span>CONTINUOUS STREAM</span>
+  </h2>
+
+  <div class="info-card">
+    Your electronic music in one continuous collection.
+    <br><br>
+    One playlist. One stream.
+    Your favorite music, playing one track after another.
+  </div>
+
+</section>
+
+<section class="section" id="about">
+
+  <h2>
+    ABOUT <span>US</span>
+  </h2>
+
+  <div class="info-card">
+    GPT ONE ONE LIVE is your electronic music destination.
+    <br><br>
+    Discover electronic music, amazing artists
+    and unforgettable sounds.
+    <br><br>
+    ONE WORLD · ONE STREAM · INFINITE MUSIC.
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  GPT ONE ONE LIVE
+  <br><br>
+  ELECTRONIC MUSIC EXPERIENCE · 2026
+</footer>
+
+<script>
+
+// YOUTUBE PLAYLIST
+const PLAYLIST_ID = "PLTQO-vsCtZqE";
+
+let player = null;
+let apiReady = false;
+let isPlaying = false;
+let shuffle = false;
+let repeat = false;
+
+// Unique video IDs started during this visit
+const playedVideoIds = new Set();
+
+const playButton =
+  document.getElementById("play");
+
+const statusText =
+  document.getElementById("status");
+
+const trackTitle =
+  document.getElementById("track-title");
+
+const artist =
+  document.getElementById("artist");
+
+const totalTracksElement =
+  document.getElementById("total-tracks");
+
+const sessionTracksElement =
+  document.getElementById("session-tracks");
+
+function setStatus(message) {
+  statusText.textContent = message;
+}
+
+// UPDATE TOTAL PLAYLIST COUNT
+function updateTotalTracks() {
+
+  if (!apiReady || !player) return;
+
+  try {
+
+    const playlist = player.getPlaylist();
+
+    if (playlist && playlist.length > 0) {
+
+      totalTracksElement.textContent =
+        playlist.length;
+
+    }
+
+  } catch (error) {
+
+    console.log("Playlist count not ready");
+
+  }
+}
+
+// UPDATE CURRENT SONG INFORMATION
+function updateTrackInfo() {
+
+  if (!apiReady || !player) return;
+
+  try {
+
+    const data = player.getVideoData();
+
+    if (data && data.title) {
+      trackTitle.textContent = data.title;
+    }
+
+    if (data && data.author) {
+      artist.textContent = data.author;
+    }
+
+    updateTotalTracks();
+
+  } catch (error) {
+
+    console.log("Track information loading");
+
+  }
+}
+
+// COUNT UNIQUE TRACKS STARTED
+function countPlayedTrack() {
+
+  if (!apiReady || !player) return;
+
+  try {
+
+    const data = player.getVideoData();
+
+    if (!data || !data.video_id) return;
+
+    const videoId = data.video_id;
+
+    if (!playedVideoIds.has(videoId)) {
+
+      playedVideoIds.add(videoId);
+
+      sessionTracksElement.textContent =
+        playedVideoIds.size;
+
+    }
+
+  } catch (error) {
+
+    console.log("Track counting error");
+
+  }
+}
+
+// PLAY AND PAUSE
+function playMusic() {
+
+  if (!apiReady || !player) {
+
+    setStatus("LOADING PLAYER...");
+
+    return;
+  }
+
+  if (isPlaying) {
+
+    player.pauseVideo();
+
+  } else {
+
+    player.playVideo();
+
+  }
+}
+
+// NEXT TRACK
+function nextTrack() {
+
+  if (!apiReady || !player) return;
+
+  player.nextVideo();
+
+}
+
+// PREVIOUS TRACK
+function previousTrack() {
+
+  if (!apiReady || !player) return;
+
+  player.previousVideo();
+
+}
+
+playButton.addEventListener(
+  "click",
+  playMusic
+);
+
+document.getElementById("next")
+  .addEventListener("click", nextTrack);
+
+document.getElementById("previous")
+  .addEventListener("click", previousTrack);
+
+// SHUFFLE
+document.getElementById("shuffle")
+  .addEventListener("click", function() {
+
+    shuffle = !shuffle;
+
+    this.classList.toggle("active", shuffle);
+
+    if (apiReady) {
+      player.setShuffle(shuffle);
+    }
+
+    setStatus(
+      shuffle ? "SHUFFLE ON" : "SHUFFLE OFF"
+    );
+
+    updateTotalTracks();
+
+  });
+
+// REPEAT
+document.getElementById("repeat")
+  .addEventListener("click", function() {
+
+    repeat = !repeat;
+
+    this.classList.toggle("active", repeat);
+
+    if (apiReady) {
+      player.setLoop(repeat);
+    }
+
+    setStatus(
+      repeat ? "REPEAT ON" : "REPEAT OFF"
+    );
+
+  });
+
+// LOAD YOUTUBE IFRAME API
+const script = document.createElement("script");
+
+script.src =
+  "https://www.youtube.com/iframe_api";
+
+document.head.appendChild(script);
+
+// CREATE YOUTUBE PLAYER
+window.onYouTubeIframeAPIReady = function() {
+
+  player = new YT.Player("youtube-player", {
+
+    width: "100%",
+    height: "100%",
+
+    playerVars: {
+
+      autoplay: 0,
+      controls: 1,
+      playsinline: 1,
+      rel: 0,
+      listType: "playlist",
+      list: PLAYLIST_ID
+
+    },
+
+    events: {
+
+      onReady: function(event) {
+
+        apiReady = true;
+
+        event.target.cuePlaylist({
+
+          listType: "playlist",
+          list: PLAYLIST_ID,
+          index: 0
+
+        });
+
+        setStatus(
+          "PLAYLIST READY · PRESS PLAY"
+        );
+
+        updateTotalTracks();
+
+        // Retry while YouTube loads playlist data
+        setInterval(function() {
+
+          updateTotalTracks();
+
+          updateTrackInfo();
+
+        }, 2000);
+
+      },
+
+      onStateChange: function(event) {
+
+        if (event.data === YT.PlayerState.PLAYING) {
+
+          isPlaying = true;
+
+          playButton.textContent = "Ⅱ";
+
+          updateTrackInfo();
+
+          countPlayedTrack();
+
+          setStatus(
+            "NOW PLAYING · GPT ONE ONE LIVE"
+          );
+
+        }
+
+        else if (event.data === YT.PlayerState.PAUSED) {
+
+          isPlaying = false;
+
+          playButton.textContent = "▶";
+
+          setStatus("PAUSED");
+
+        }
+
+        else if (event.data === YT.PlayerState.ENDED) {
+
+          isPlaying = false;
+
+          playButton.textContent = "▶";
+
+          setStatus("TRACK FINISHED");
+
+        }
+
+        else if (event.data === YT.PlayerState.BUFFERING) {
+
+          setStatus("BUFFERING...");
+
+        }
+
+        else if (event.data === YT.PlayerState.CUED) {
+
+          updateTrackInfo();
+
+          setStatus("READY TO PLAY");
+
+        }
+
+      },
+
+      onError: function(event) {
+
+        isPlaying = false;
+
+        playButton.textContent = "▶";
+
+        setStatus(
+          "YOUTUBE ERROR " + event.data
+        );
+
+      },
+
+      onAutoplayBlocked: function() {
+
+        setStatus("PRESS PLAY TO START MUSIC");
+
+      }
+
+    }
+
+  });
+
+};
+
+</script>
+
+</body>
+</html>
